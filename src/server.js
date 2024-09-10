@@ -3,8 +3,15 @@ const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const router = require('./router')
+const mongoose = require('mongoose')
 
+const DATABASE_URL = process.env.DATABASE_URL
 const SERVER_PORT = process.env.SERVER_PORT
+
+mongoose
+	.connect(DATABASE_URL)
+	.then(() => console.log('Database connection success!'))
+	.catch((error) => console.error('Database connection error!: ' + error))
 
 const app = express()
 
