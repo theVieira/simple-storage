@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const router = require('./router')
 const mongoose = require('mongoose')
+const { resolve } = require('node:path')
 
 const DATABASE_URL = process.env.DATABASE_URL
 const SERVER_PORT = process.env.SERVER_PORT
@@ -19,6 +20,8 @@ app.use(express.json())
 
 app.use(cors())
 app.use(morgan('dev'))
+
+app.use(express.static(resolve(__dirname, '..', 'uploads')))
 
 app.use(router)
 
